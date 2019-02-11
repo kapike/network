@@ -128,11 +128,12 @@ int main(int argc, char* argv[])
                             
                         }
                         memset(buf, 0, BUF_SIZE);
-                    }else if(readret == -1){
-                        fprintf(stderr,"Error recv from client.\n");   
+                    }else if(readret <= 0){
+                    
+                        FD_CLR(i, &master);  
+                        close(i);
                     }
-                    close(i);
-                    FD_CLR(i, &master);
+                    
                     
                 }
             }
